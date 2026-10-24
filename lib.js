@@ -1,3 +1,12 @@
+export function googleFormLinks(value) {
+  const url = new URL(value);
+  if (url.origin !== 'https://docs.google.com' || !/^\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform$/.test(url.pathname)) {
+    throw new Error('Use the published Google Forms responder URL ending in /viewform.');
+  }
+  const direct = `${url.origin}${url.pathname}`;
+  return {direct, embed: `${direct}?embedded=true`};
+}
+
 export function endpointIsConfigured(endpoint) {
   return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint);
 }

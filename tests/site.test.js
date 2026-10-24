@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {CONFIG} from '../config.js';
-import {createIcs, mapsUrl, normalizeRsvp, submitRsvp, endpointIsConfigured} from '../lib.js';
+import {createIcs, googleFormLinks, mapsUrl, normalizeRsvp, submitRsvp, endpointIsConfigured} from '../lib.js';
 const endpoint = 'https://script.google.com/macros/s/TEST_DEPLOYMENT/exec';
 const input = {familyName:' Example Family ',attending:'yes',count:'3',guestNames:'Alex, Sam, Jamie',dietaryNeeds:'Vegetarian',message:'Congratulations!',website:''};
 const payload = {...normalizeRsvp(input),requestId:'12345678-1234-4123-8123-123456789abc'};
@@ -95,4 +95,17 @@ test('Apps Script handles concurrent lock failure and write-then-error retry saf
 });
 test('public health response never includes guest data',()=>{
  const b=backend();b.post();const health=b.context.doGet();assert.equal(health.ok,true);assert.ok(!JSON.stringify(health).includes(payload.familyName));
+});
+
+test('Google Forms uses the supplied responder URL and a responsive embed URL',()=>{
+ const urls=googleFormLinks(CONFIG.googleFormUrl);
+ assert.ok(urls.direct.endsWith('/viewform'));
+ assert.equal(new URL(urls.embed).searchParams.get('embedded'),'true');
+ assert.deepEqual(googleFormLinks(urls.embed),urls);
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ assert.ok(html.includes(`src="${urls.embed}"`));
+ assert.ok(html.includes('id="custom-rsvp" hidden'));
+});
+test('Google Forms configuration rejects unrelated sites and editor URLs',()=>{
+ for(const url of ['javascript:alert(1)','https://example.com/forms/d/e/id/viewform','https://docs.google.com/forms/d/id/edit']) assert.throws(()=>googleFormLinks(url));
 });

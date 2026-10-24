@@ -51,6 +51,15 @@
       <p class="eyebrow">A seat at our celebration</p>
       <h2 id="rsvp-heading">Will you be joining us?</h2>
       <p class="section-intro">We’d love to share this special day with you.<br>One reply for your whole family is perfect.</p>
+      <div id="google-rsvp">
+        <p class="google-form-intro">Please count everyone in your party, including yourself and any children.<br><strong>You + 2 guests = 3 people attending.</strong></p>
+        <p class="google-form-fallback">If the form doesn’t load or asks you to sign in, <a id="google-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe-GOG6Brla4kP1LSPl_xA_30YvRvUjAJ5fH1uKphJCCu4sdQ/viewform" target="_blank" rel="noopener noreferrer">open the RSVP form in a new tab</a>.</p>
+        <div class="google-form-frame">
+          <iframe id="google-form" title="RSVP for Shivani’s baby shower" src="https://docs.google.com/forms/d/e/1FAIpQLSe-GOG6Brla4kP1LSPl_xA_30YvRvUjAJ5fH1uKphJCCu4sdQ/viewform?embedded=true" width="640" height="1047" loading="lazy">Loading RSVP form…</iframe>
+        </div>
+        <p class="privacy-note">Responses are collected through Google Forms for the hosts to plan the celebration.</p>
+      </div>
+      <div id="custom-rsvp" hidden>
       <noscript><p class="notice">Please enable JavaScript to RSVP here. You can still download the calendar event or open directions above.</p></noscript>
       <p id="setup-notice" class="notice" hidden>Online RSVPs aren’t open yet. Please check back or contact the host to reply.</p>
       <form id="rsvp-form" aria-describedby="privacy-note">
@@ -89,6 +98,7 @@
         <h3 id="confirmation-heading">Thank you!</h3>
         <p id="confirmation-message">We can’t wait to celebrate with you.</p>
         <p class="confirmation-footnote">Your RSVP has been saved. To change your reply, please contact the host.</p>
+      </div>
       </div>
     </section>
   </main>

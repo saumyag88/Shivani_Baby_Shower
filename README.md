@@ -2,9 +2,9 @@
 
 A mobile-first invitation for **Sunday, December 13, 2026**, with puja at **10:00 AM Pacific**, lunch and games at **11:00 AM Pacific**, at **The Courtyard Hall, Sunnyvale, CA**.
 
-Plain HTML, CSS, JavaScript, and original SVG artwork. No framework, installation, build step, analytics, paid service, or external font is needed to serve the site. Google Apps Script writes RSVPs to a private Google Sheet. GitHub Pages serves the invitation.
+Plain HTML, CSS, JavaScript, and original SVG artwork. No framework, installation, build step, analytics, paid service, or external font is needed to serve the site. The active RSVP section embeds the host’s Google Form. Google Forms handles submissions and can save responses to a private Google Sheet. GitHub Pages serves the invitation. An optional custom Apps Script form is retained for hosts who prefer it.
 
-**Before sharing with guests:** deploy the Apps Script, paste its URL into `config.js`, publish the site, and send one test RSVP from the published site. The form deliberately stays disabled until its endpoint is configured. The map is a venue search, not a verified street address. Confirm the venue pin before relying on it.
+**Before sharing with guests:** publish the Google Form for your intended responders, add the total-guest-count question, link its responses to a private Google Sheet, and submit a test response. Google Forms is selected by `googleFormUrl` in `config.js`; no Apps Script deployment is needed for this mode. The map is a venue search, not a verified street address. Confirm the venue pin before relying on it.
 
 ## Files
 
@@ -29,6 +29,32 @@ python3 -m http.server 8000 --bind 127.0.0.1
 Open `http://localhost:8000` in your browser. Stop the server with Control-C. Serve the folder over HTTP; opening `index.html` directly as a file will block JavaScript modules. The deployed GitHub Pages site uses HTTPS, which also supports the browser’s secure random IDs.
 
 ## Getting the RSVP form working
+
+The active form is [the Google Form supplied by the host](https://docs.google.com/forms/d/e/1FAIpQLSe-GOG6Brla4kP1LSPl_xA_30YvRvUjAJ5fH1uKphJCCu4sdQ/viewform). The website embeds it at full available width and provides a direct link if the embedded form cannot load. It works without website JavaScript. Google controls the embedded questions, validation, confirmation, styling and response storage; the surrounding website cannot inspect or alter those cross-origin fields.
+
+1. Open your form in the **Google Forms editor**. The public responder/embed link is not an editor link.
+2. Include **Guest / family name** (required), **Will you be attending?** (required), and **Total people attending, including yourself** (required dropdown with values `0` through `10`). Add this description to the count question: **“You + 2 guests = 3. Include children. Choose 0 if you cannot attend.”** Guest names, dietary needs and a message can be optional questions. Using 0 for declines avoids needing conditional sections.
+3. Click **Publish** (or **Published → Manage**) and check responder access. For guests without Google accounts, use **Anyone with the link**, disable **Limit to 1 response**, and avoid verified-email collection and file-upload questions that require sign-in. Organization policies can impose additional restrictions. Test the responder link in a signed-out/private browser window.
+4. Open **Responses → Link to Sheets** (the green Sheets icon). Create a new spreadsheet or choose an existing one. Keep the response spreadsheet **Restricted**. Do not enable public response summaries.
+5. Submit a fictional test response with a total of 3, then check that the linked sheet contains 3. Remove only your own test row/response afterward. Test a decline with a count of 0.
+6. In the form’s settings, customize its confirmation message. The website does not show its own success message for embedded submissions and does not claim to know whether Google saved a response.
+
+To see total guests, sum the **count column** in the linked spreadsheet. Google Forms’ response counter measures submissions, not people. For example, if your count is in column D of `Form Responses 1`, create a separate **Summary** tab and use:
+
+```excel
+=SUM(ARRAYFORMULA(IFERROR(VALUE('Form Responses 1'!D2:D),0)))
+```
+
+Replace `D` and the response-tab name with the actual column and tab in your sheet. Numeric conversion also handles dropdown values stored as text. Count 0 for anyone declining; remove duplicate submissions if guests submit more than once. The previously supplied formula for the custom Apps Script sheet is not applicable unless your Google Form happens to have the same columns.
+
+During inspection, this form redirected to Google sign-in, which could not be completed in the browser environment. Its questions, anonymous access and successful submission have **not** been verified. Adding the embed to the site does not change the form’s Google permissions.
+
+Official instructions: [publish and share a Google Form](https://support.google.com/docs/answer/2839588?hl=en) and [view and manage responses](https://support.google.com/docs/answer/139706?hl=en).
+
+## Optional: use the original Apps Script form instead
+
+Skip this section when using the supplied Google Form. To switch providers, set `googleFormUrl: ''` in `config.js`, then follow the instructions below and set `rsvpEndpoint`. The custom form shows total guest count upfront and hides it for declines. It stays disabled until the Apps Script endpoint is configured.
+
 
 ### 1. Create the private response sheet
 
@@ -155,9 +181,12 @@ Change values in `config.js`:
 | `endsAt` | Set only when an end time is confirmed; currently `null` |
 | `venue`, `city`, `streetAddress` | Venue and location; street address intentionally blank |
 | `mapsUrl` | Optional verified HTTPS map link; empty means search the configured location |
-| `rsvpEndpoint` | Google Apps Script web-app `/exec` URL |
+| `googleFormUrl` | Active Google Forms responder URL; edit its questions in Google Forms |
+| `rsvpEndpoint` | Optional Google Apps Script `/exec` URL, used only when `googleFormUrl` is empty |
 
 December 13, 2026 is in Pacific Standard Time (`-08:00`), so 10 AM is `18:00Z`. If you change the date into daylight saving time, update the ISO offsets accordingly. The default calendar file has no end time; a calendar app may display its own default duration. Do not treat that as a confirmed event end.
+
+If changing `googleFormUrl`, also update both the iframe source and fallback link in `index.html` for visitors without JavaScript.
 
 With JavaScript enabled, the date, schedule, honoree, venue, map and generated calendar all read `config.js`. After changing details, also update the readable no-JavaScript fallback text, page description, and wording in `index.html`. Change the main invitation heading there. Update `lib.js`’s fixed event UID only if repurposing this project for a different event.
 
@@ -172,7 +201,7 @@ Adjust palette, typography and spacing in `styles.css`. The desktop and mobile b
 
 ## Privacy and maintenance
 
-The invitation is a publicly shareable URL; `noindex` asks search engines not to index it but is not access control. RSVP data stays in Google Sheets, subject to that sheet’s sharing settings. No guest text is logged by the frontend, written to Git, sent to analytics, or included in calendar/map links. Google receives submissions, and Google Maps is contacted only when a guest opens directions. Do not put response exports, credentials, or private guest data into this repository. `.gitignore` excludes common exports and key files, but review every commit.
+The invitation is a publicly shareable URL; `noindex` asks search engines not to index it but is not access control. In Google Forms mode, RSVP data is stored by Google Forms and its linked Google Sheet, subject to the form and sheet sharing settings. No guest text is logged by the frontend, written to Git, sent to analytics, or included in calendar/map links. The embedded form loads content from Google and sends submissions directly to Google. Google Maps is contacted only when a guest opens directions. Do not put response exports, credentials, or private guest data into this repository. `.gitignore` excludes common exports and key files, but review every commit.
 
 ## Verification
 
