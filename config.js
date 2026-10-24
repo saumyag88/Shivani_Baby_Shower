@@ -10,7 +10,6 @@ export const CONFIG = Object.freeze({
   city: 'Sunnyvale, CA',
   streetAddress: '', // Add only when confirmed by the host.
   mapsUrl: '', // Optional exact Google Maps link; otherwise search venue + city.
-  googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe-GOG6Brla4kP1LSPl_xA_30YvRvUjAJ5fH1uKphJCCu4sdQ/viewform', // Active RSVP provider. Questions are edited in Google Forms.
-  rsvpEndpoint: '', // Optional custom form: clear googleFormUrl and set an Apps Script /exec URL.
+  rsvpEndpoint: '', // Required: deployed Web app URL for the host-supplied Code.gs, ending in /exec.
   requestTimeoutMs: 25000,
 });

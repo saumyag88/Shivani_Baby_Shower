@@ -1,44 +1,21 @@
 # Verification record
 
-Checked October 24, 2026.
+October 24, 2026. The custom form is restored and adapted to the exact six-column Apps Script supplied in `code.text`. The Google Forms embed has been removed.
 
 ## Automated checks
 
-`node --test tests/*.test.js`: **19 tests passed**. `node --check` also passed for the browser JavaScript modules.
+`node --test tests/*.test.js`: **17 tests passed**. JavaScript syntax and Git whitespace checks passed.
 
-Coverage includes required fields, 1–10 guest bounds, decline normalization, text limits, the exact Pacific date/time, calendar escaping and UTF-8 line folding, checked-in calendar consistency, directions configuration, endpoint validation, readable matching server confirmations, opaque/malformed/network/HTTP failures, timeout handling, server rejection, backend validation, spreadsheet formula protection, locked writes, duplicate request IDs, write-then-error recovery, and a health endpoint that reveals no guest data.
+Verified event date/time, calendar escaping and line folding, the checked-in calendar, directions, required fields and 1–10 guest bounds, decline normalization, and production endpoint validation. New adapter checks verify `name`, `attending`, `partySize`, empty `email`, and labeled `notes` containing every optional field. Formula-like names are sent as literal text.
 
-Apps Script tests execute `Code.gs` in a Node VM with mocked Google services. They verify the application logic, not Google deployment permissions, runtime service availability, quotas, or live cross-origin behavior.
+The exact supplied Apps Script is executed in a Node VM with mocked Google services. Its `setup()` creates six columns and the Summary formula. Integration tests verify that a three-person RSVP writes a count of 3, a decline writes 0, and all guest/dietary/message text is preserved in Notes. Its public health message contains no guest data.
 
-## Browser checks for the original custom form
+The tests explicitly verify that this backend appends each repeated request. The frontend therefore does not promise safe retries. Opaque, malformed, HTTP/server, network, and timeout errors remain unconfirmed and tell guests to check with the host before resubmitting.
 
-Used the in-app Chromium browser against a local HTTP server. Reviewed the original invitation screenshot, then visually inspected the recreated mobile and desktop layouts. Corrected the mobile botanical border to preserve ornament proportions.
+## Browser verification
 
-At viewport widths **375, 390, 430, 768, and 1280 px**, the document’s scroll width equaled its client width: no horizontal overflow. Checked the small-screen and desktop layouts, readable event details, directions destination, calendar download link, and the production form’s unconfigured notice.
+The original invitation and custom form were visually checked at widths 375, 390, 430, 768 and 1280 px without horizontal overflow. The total-count field was verified visible before choosing attendance, hidden for declines, required for attending guests, and working with a three-person local test. The previous Google Forms-specific tests do not apply to this restored provider.
 
-A separate temporary, clearly marked local test copy used fictional names and mocked fetch responses; it did not send any data to Google. Verified:
+A separate local mock using the supplied `{result: "success", row: 2}` response verified the restored form’s three-person success screen. A simulated network failure kept the reply visible and disabled another submission, with an instruction to contact the host. No Google response was created during these checks.
 
-- Empty required fields prevent submission and focus the name field.
-- Total people attending is visible before an attendance choice, including while setup is incomplete. The label explicitly includes the person replying and gives a party-size example. Selecting No hides the count; selecting Yes shows it and makes it required. Guest names and dietary fields appear only for Yes.
-- Sending disables the button and fields.
-- A network error retains and locks the pending reply, with an enabled retry button.
-- Retrying a successful mock shows the attending confirmation.
-- A decline shows the separate decline confirmation.
-- A server validation rejection permits editing again.
-- A timeout offers retry without claiming success.
-- No browser console errors or warnings during these checks.
-
-The mock copy is not part of the published site. The production bundle has no demo-success switch.
-
-## Google Forms integration
-
-The supplied responder URL is now the active provider. Automated checks verify URL validation, the embed query, the no-JavaScript iframe source, and that the custom form is initially hidden. An initial direct visit redirected to a sign-in page that could not load, but subsequent verification on the published invitation successfully rendered the embedded form without signing in. Confirmed the embed source, hidden custom form, and the real Google count dropdown with options 1–5. The Google questions showed no required markers; the README explains enabling Required and adding 0 for declines. No real response was submitted, so submission and linked-sheet storage remain unverified. The website provides a direct-form fallback link and an explicit total-headcount reminder.
-
-## Live checks still required
-
-For the active Google Form, follow the Google Forms instructions in the README, confirm the count question includes the person replying, publish for the intended responders, and check a test response in the linked Sheet. The Apps Script checks below apply only if switching back to the optional custom form.
-
-
-No real Google Apps Script endpoint was supplied during implementation. After following the README, verify anonymous access and both attending/declining submissions from the published GitHub Pages URL, and confirm the rows in the private Google Sheet. Test on physical iPhone/Safari and Android/Chrome as available; viewport simulation does not replace those device checks.
-
-Confirm the exact street address and map pin with the host. Confirm an end time if one should appear in the calendar; none has been invented.
+Live browser submission against the newly supplied deployed Apps Script still requires its `/exec` URL. Node VM tests do not verify deployment permissions, CORS, Google service availability, or storage in the real Sheet. Test a response from the published invitation and verify the saved row and Summary total before sharing with guests.

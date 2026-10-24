@@ -792,35 +792,3 @@ footer small {
     background-image:url('./assets/botanical-border-mobile.svg');
   }
 }
-
-.google-form-intro {
-  margin: 26px auto 0;
-  text-align: center;
-  font-size: 13px;
-}
-.google-form-fallback {
-  margin: 14px auto 20px;
-  text-align: center;
-  font-size: 12px;
-}
-.google-form-fallback a {
-  color: var(--purple);
-  text-underline-offset: 3px;
-}
-.google-form-frame {
-  margin: 0 -44px;
-}
-.google-form-frame iframe {
-  display: block;
-  width: 100%;
-  height: 1047px;
-  border: 0;
-  background: var(--white);
-}
-@media (max-width:600px) {
-  .google-form-frame { margin: 0 -18px; }
-  .google-form-frame iframe { height: 1300px; }
-}
-@media (max-width:350px) {
-  .google-form-frame { margin: 0 -12px; }
-}

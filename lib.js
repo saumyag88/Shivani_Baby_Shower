@@ -1,12 +1,3 @@
-export function googleFormLinks(value) {
-  const url = new URL(value);
-  if (url.origin !== 'https://docs.google.com' || !/^\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform$/.test(url.pathname)) {
-    throw new Error('Use the published Google Forms responder URL ending in /viewform.');
-  }
-  const direct = `${url.origin}${url.pathname}`;
-  return {direct, embed: `${direct}?embedded=true`};
-}
-
 export function endpointIsConfigured(endpoint) {
   return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint);
 }
@@ -72,30 +63,39 @@ export class SubmissionError extends Error {
   constructor(message, uncertain = true) { super(message); this.uncertain = uncertain; }
 }
 
+// Match the six-column Apps Script supplied by the host. Optional details share Notes.
+export function toAppsScriptPayload(input) {
+  const value = normalizeRsvp(input);
+  if (value.website) throw new SubmissionError('Please leave the website field empty.', false);
+  const asText = text => /^[\s]*[=+\-@]/.test(text) ? "'" + text : text;
+  const notes = [
+    value.guestNames && `Guest names: ${value.guestNames}`,
+    value.dietaryNeeds && `Dietary needs: ${value.dietaryNeeds}`,
+    value.message && `Message: ${value.message}`,
+  ].filter(Boolean).join('\n');
+  return {name: asText(value.familyName), attending: value.attending,
+    partySize: value.count, email: '', notes: asText(notes)};
+}
+
 export async function submitRsvp(endpoint, payload, {timeoutMs = 25000, fetchImpl = fetch} = {}) {
   if (!endpointIsConfigured(endpoint)) throw new SubmissionError('Online RSVPs aren’t open yet. Please contact the host.', false);
+  const body = new URLSearchParams(toAppsScriptPayload(payload));
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    // URLSearchParams uses a CORS-safelisted content type: no preflight or custom headers.
-    // Never use no-cors: an opaque response cannot prove that an RSVP was saved.
+    // Form-encoded POST avoids CORS preflight; never treat an opaque response as saved.
     const response = await fetchImpl(endpoint, {
-      method: 'POST', body: new URLSearchParams(payload), mode: 'cors',
-      credentials: 'omit', redirect: 'follow', signal: controller.signal,
+      method: 'POST', body, mode: 'cors', credentials: 'omit',
+      redirect: 'follow', signal: controller.signal,
     });
     if (!response.ok || response.type === 'opaque') throw new Error('Unconfirmed server response');
     const result = await response.json();
-    if (result.requestId !== payload.requestId) throw new Error('Unmatched confirmation');
-    if (result.ok !== true) {
-      const message = result.code === 'INVALID_INPUT'
-        ? 'Please check your reply and try again.'
-        : 'We couldn’t save your reply just now. Please try again, or contact the host.';
-      // Storage failures may happen after a write; only validation failures are known unsaved.
-      throw new SubmissionError(message, result.code !== 'INVALID_INPUT');
+    if (result.result !== 'success' || !Number.isInteger(result.row) || result.row < 2) {
+      throw new Error('No saved-row confirmation');
     }
     return result;
-  } catch (error) {
-    if (error instanceof SubmissionError) throw error;
-    throw new SubmissionError('We couldn’t confirm your RSVP. Your reply may have been saved. Please retry the same reply below; retries won’t add another entry. If this continues, contact the host.');
+  } catch {
+    // This deployed script has no idempotency key. A lost acknowledgement cannot be retried safely.
+    throw new SubmissionError('We couldn’t confirm your RSVP. It may already have been saved. Please contact the host before submitting again so your guests aren’t counted twice.');
   } finally { clearTimeout(timer); }
 }
