@@ -19,7 +19,7 @@ At viewport widths **375, 390, 430, 768, and 1280 px**, the document’s scroll 
 A separate temporary, clearly marked local test copy used fictional names and mocked fetch responses; it did not send any data to Google. Verified:
 
 - Empty required fields prevent submission and focus the name field.
-- Selecting Yes reveals guest count, names and dietary fields; selecting No hides them.
+- Total people attending is visible before an attendance choice, including while setup is incomplete. The label explicitly includes the person replying and gives a party-size example. Selecting No hides the count; selecting Yes shows it and makes it required. Guest names and dietary fields appear only for Yes.
 - Sending disables the button and fields.
 - A network error retains and locks the pending reply, with an enabled retry button.
 - Retrying a successful mock shows the attending confirmation.

@@ -67,13 +67,13 @@
               <label class="radio-option"><input type="radio" name="attending" value="no" required><span>Sorry, we can’t make it</span></label>
             </div>
           </fieldset>
+          <div id="count-field" class="field count-field">
+            <label for="guest-count">Total people attending, including yourself <span class="required-label">(required if attending)</span><span class="field-hint">You + 2 guests = 3. Include children in your total.</span></label>
+            <select id="guest-count" name="count" disabled>
+              <option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+            </select>
+          </div>
           <div id="attending-fields" hidden>
-            <div class="field count-field">
-              <label for="guest-count">Number attending <span class="required-label">(required)</span><span class="field-hint">Including you and any children</span></label>
-              <select id="guest-count" name="count" disabled>
-                <option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-              </select>
-            </div>
             <div class="field"><label for="guest-names">Names of guests attending <span class="optional">(optional)</span></label><textarea id="guest-names" name="guestNames" rows="2" maxlength="500" placeholder="So we know who to look forward to seeing" disabled></textarea></div>
             <div class="field"><label for="dietary-needs">Dietary needs <span class="optional">(optional)</span></label><input id="dietary-needs" name="dietaryNeeds" maxlength="500" placeholder="Allergies or dietary preferences" disabled></div>
           </div>

@@ -34,7 +34,10 @@ let pendingPayload = null;
 const storageKey = `shivani-rsvp:${CONFIG.startsAt}`;
 
 function updateAttendance() {
-  const yes = form.elements.attending.value === 'yes';
+  const answer = form.elements.attending.value;
+  const yes = answer === 'yes';
+  byId('count-field').hidden = answer === 'no';
+  byId('guest-count').disabled = !configured || answer === 'no';
   byId('attending-fields').hidden = !yes;
   for (const input of byId('attending-fields').querySelectorAll('input, select, textarea')) input.disabled = !yes;
   byId('guest-count').required = yes;
