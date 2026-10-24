@@ -6,6 +6,8 @@ Sunday, December 13, 2026 · Puja 10:00 AM · Lunch & Games 11:00 AM · The Cour
 
 The original custom RSVP form is restored. It sends directly to the Google Apps Script supplied by the host in `code.text`. Google Forms is no longer embedded. Static HTML/CSS/JavaScript and original SVG artwork run on GitHub Pages without a framework, installation, or build step.
 
+The deployed endpoint is configured. A live test decline with 0 guests received a server-confirmed save on October 24, 2026. You can remove the row labeled **TEST — website connection check — delete this row** from your private response Sheet; it does not increase the Summary total.
+
 ## Getting the RSVP form working
 
 If you have already run `setup()` and deployed the supplied script:
