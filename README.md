@@ -47,7 +47,7 @@ To see total guests, sum the **count column** in the linked spreadsheet. Google 
 
 Replace `D` and the response-tab name with the actual column and tab in your sheet. Numeric conversion also handles dropdown values stored as text. Count 0 for anyone declining; remove duplicate submissions if guests submit more than once. The previously supplied formula for the custom Apps Script sheet is not applicable unless your Google Form happens to have the same columns.
 
-During inspection, this form redirected to Google sign-in, which could not be completed in the browser environment. Its questions, anonymous access and successful submission have **not** been verified. Adding the embed to the site does not change the form’s Google permissions.
+The embedded form was verified on the published invitation without signing in. It contains Full Name, attendance, a total-people dropdown with options 1–5, and a combined comments/dietary-needs/well-wishes field. These fields show no required markers. In the Google Forms editor, enable Required for name, attendance and total count, and add 0 for declines (and 6–10 if needed). No real response was submitted; successful storage in the linked Sheet still needs a host test. The optional Google sign-in prompt saves progress and did not block the form. Adding the embed does not change Google permissions.
 
 Official instructions: [publish and share a Google Form](https://support.google.com/docs/answer/2839588?hl=en) and [view and manage responses](https://support.google.com/docs/answer/139706?hl=en).
 

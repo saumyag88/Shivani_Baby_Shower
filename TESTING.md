@@ -32,7 +32,7 @@ The mock copy is not part of the published site. The production bundle has no de
 
 ## Google Forms integration
 
-The supplied responder URL is now the active provider. Automated checks verify URL validation, the embed query, the no-JavaScript iframe source, and that the custom form is initially hidden. The public form redirected to Google sign-in in the browser environment, and could not be inspected. No real response was submitted. Embedded form rendering, its count question, anonymous responder access and linked-sheet storage remain unverified. The website provides a direct-form fallback link and an explicit total-headcount reminder.
+The supplied responder URL is now the active provider. Automated checks verify URL validation, the embed query, the no-JavaScript iframe source, and that the custom form is initially hidden. An initial direct visit redirected to a sign-in page that could not load, but subsequent verification on the published invitation successfully rendered the embedded form without signing in. Confirmed the embed source, hidden custom form, and the real Google count dropdown with options 1–5. The Google questions showed no required markers; the README explains enabling Required and adding 0 for declines. No real response was submitted, so submission and linked-sheet storage remain unverified. The website provides a direct-form fallback link and an explicit total-headcount reminder.
 
 ## Live checks still required
 
