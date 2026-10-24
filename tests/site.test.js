@@ -17,8 +17,8 @@ test('attendance data normalizes and clears hidden fields for declines',()=>{
  assert.deepEqual(normalizeRsvp({...input,attending:'no'}),{familyName:'Example Family',attending:'no',count:0,guestNames:'',dietaryNeeds:'',message:'Congratulations!',website:''});
 });
 test('required data, count bounds and field length are enforced',()=>{
- for(const patch of [{familyName:' '},{attending:''},{count:''},{count:'0'},{count:'11'},{count:'1.5'},{familyName:'a'.repeat(121)},{message:'a'.repeat(1501)}]) assert.throws(()=>normalizeRsvp({...input,...patch}));
- for(const count of ['1','10']) assert.equal(normalizeRsvp({...input,count}).count,Number(count));
+ for(const patch of [{familyName:' '},{attending:''},{count:''},{count:'0'},{count:'5'},{count:'1.5'},{familyName:'a'.repeat(121)},{message:'a'.repeat(1501)}]) assert.throws(()=>normalizeRsvp({...input,...patch}));
+ for(const count of ['1','4']) assert.equal(normalizeRsvp({...input,count}).count,Number(count));
 });
 test('maps search includes no invented street address',()=>{
  assert.equal(new URL(mapsUrl(CONFIG)).searchParams.get('query'),'The Courtyard Hall, Sunnyvale, CA');

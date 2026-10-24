@@ -345,12 +345,12 @@ h1 em {
   margin-bottom:17px;
 }
 
-.rsvp-section>.eyebrow {
+#rsvp-intro>.eyebrow {
   text-align:center;
   color:var(--green);
 }
 
-.rsvp-section>h2 {
+#rsvp-intro>h2 {
   font-family:var(--serif);
   font-weight:400;
   font-size:35px;
@@ -572,7 +572,7 @@ input[type=radio] {
   font-size:48px;
 }
 
-.confirmation h3 {
+.confirmation h2 {
   font-family:var(--serif);
   font-size:34px;
   font-weight:400;
@@ -730,13 +730,13 @@ footer small {
     margin-top:38px;
     padding:30px 23px 29px;
   }
-  .rsvp-section>h2 {
+  #rsvp-intro>h2 {
     font-size:29px;
   }
   .section-intro {
     font-size:15px;
   }
-  .rsvp-section>.eyebrow {
+  #rsvp-intro>.eyebrow {
     font-size:9px;
   }
   form {
@@ -773,7 +773,7 @@ footer small {
   .schedule {
     gap:10px;
   }
-  .rsvp-section>h2 {
+  #rsvp-intro>h2 {
     font-size:26px;
   }
 }

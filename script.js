@@ -65,6 +65,8 @@ form.addEventListener('submit', async event => {
     byId('confirmation-heading').textContent = attending ? 'Thank you!' : 'Thank you for letting us know.';
     byId('confirmation-message').textContent = attending ? 'We can’t wait to celebrate with you.' : 'We’ll miss celebrating with you!';
     form.hidden = true;
+    byId('rsvp-intro').hidden = true;
+    byId('rsvp').setAttribute('aria-labelledby', 'confirmation-heading');
     byId('confirmation').hidden = false;
     byId('confirmation').focus();
   } catch (error) {

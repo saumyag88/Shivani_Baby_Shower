@@ -47,10 +47,12 @@
     </nav>
     <p id="directions-note" class="directions-note">Map opens a venue search. Please confirm the exact address with the host.</p>
     <section id="rsvp" class="rsvp-section" aria-labelledby="rsvp-heading">
-      <div class="section-flower" aria-hidden="true">✾</div>
-      <p class="eyebrow">A seat at our celebration</p>
-      <h2 id="rsvp-heading">Will you be joining us?</h2>
-      <p class="section-intro">We’d love to share this special day with you.<br>One reply for your whole family is perfect.</p>
+      <header id="rsvp-intro">
+        <div class="section-flower" aria-hidden="true">✾</div>
+        <p class="eyebrow">A seat at our celebration</p>
+        <h2 id="rsvp-heading">Will you be joining us?</h2>
+        <p class="section-intro">We’d love to share this special day with you.<br>One reply for your whole family is perfect.</p>
+      </header>
       <noscript><p class="notice">Please enable JavaScript to RSVP here. You can still download the calendar event or open directions above.</p></noscript>
       <p id="setup-notice" class="notice" hidden>Online RSVPs aren’t open yet. Please check back or contact the host to reply.</p>
       <form id="rsvp-form" aria-describedby="privacy-note">
@@ -68,9 +70,9 @@
             </div>
           </fieldset>
           <div id="count-field" class="field count-field">
-            <label for="guest-count">Total people attending, including yourself <span class="required-label">(required if attending)</span><span class="field-hint">You + 2 guests = 3. Include children in your total.</span></label>
+            <label for="guest-count">Total people attending, including yourself <span class="required-label">(required if attending)</span><span class="field-hint">Maximum 4 people, including you and any children.</span></label>
             <select id="guest-count" name="count" disabled>
-              <option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+              <option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option>
             </select>
           </div>
           <div id="attending-fields" hidden>
@@ -86,7 +88,7 @@
       </form>
       <div id="confirmation" class="confirmation" hidden tabindex="-1">
         <div class="confirmation-flower" aria-hidden="true">✿</div>
-        <h3 id="confirmation-heading">Thank you!</h3>
+        <h2 id="confirmation-heading">Thank you!</h2>
         <p id="confirmation-message">We can’t wait to celebrate with you.</p>
         <p class="confirmation-footnote">Your RSVP has been saved. To change your reply, please contact the host.</p>
       </div>

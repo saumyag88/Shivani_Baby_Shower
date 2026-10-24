@@ -12,7 +12,7 @@ export function normalizeRsvp(input) {
   if (!['yes', 'no'].includes(input.attending)) throw new Error('Please choose whether you’ll be attending.');
   const yes = input.attending === 'yes';
   const count = yes ? Number(input.count) : 0;
-  if (yes && (!Number.isInteger(count) || count < 1 || count > 10)) throw new Error('Please choose 1–10 guests.');
+  if (yes && (!Number.isInteger(count) || count < 1 || count > 4)) throw new Error('Please choose 1–4 people, including yourself.');
   return {
     familyName, attending: input.attending, count,
     guestNames: yes ? value('guestNames', 500) : '',

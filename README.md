@@ -32,7 +32,7 @@ For code changes in Apps Script, saving is not enough: choose **Deploy → Manag
 
 ## Guest count and your total
 
-The website asks **Total people attending, including yourself**. You plus two guests means **3**, including children. Attending parties choose 1–10. Declines send **0** and clear attendance-only guest/dietary details. The count is visible before selecting attendance and hides only for a decline.
+The website asks **Total people attending, including yourself**. You plus two guests means **3**, including children. Attending parties choose 1–4. Declines send **0** and clear attendance-only guest/dietary details. The count is visible before selecting attendance and hides only for a decline.
 
 The supplied `setup()` creates the total automatically in **Summary → B1**:
 
