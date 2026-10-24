@@ -792,3 +792,22 @@ footer small {
     background-image:url('./assets/botanical-border-mobile.svg');
   }
 }
+
+.registry-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-top:28px;
+  padding:14px 22px;
+  border-radius:3px;
+  background:var(--green);
+  color:var(--cream, #fffdf7);
+  font-family:var(--sans);
+  font-size:15px;
+  text-decoration:none;
+}
+
+.registry-link:hover {
+  background:var(--purple);
+}

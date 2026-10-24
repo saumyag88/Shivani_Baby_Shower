@@ -16,6 +16,7 @@ byId('venue').textContent = CONFIG.venue;
 byId('location').textContent = [CONFIG.streetAddress, CONFIG.city].filter(Boolean).join(', ');
 byId('footer-date').textContent = format(CONFIG.startsAt, {month: 'long', day: 'numeric', year: 'numeric'});
 byId('directions-link').href = mapsUrl(CONFIG);
+byId('registry-link').href = CONFIG.registryUrl;
 byId('directions-note').hidden = Boolean(CONFIG.streetAddress || CONFIG.mapsUrl);
 const calendarUrl = URL.createObjectURL(new Blob([createIcs(CONFIG)], {type: 'text/calendar;charset=utf-8'}));
 byId('calendar-link').href = calendarUrl;
