@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f0e5">
+  <meta name="description" content="Join us for Shivani’s baby shower on Sunday, December 13, 2026 in Sunnyvale. Event details and RSVP.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Shivani’s Baby Shower · December 13, 2026</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#rsvp">Skip to RSVP</a>
+  <header class="page-header" aria-label="Invitation">
+    <a class="monogram" href="#invitation" aria-label="Back to invitation">s<span>✦</span></a>
+    <span>A little celebration of love</span>
+    <a href="#rsvp" class="header-rsvp">RSVP <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section id="invitation" class="invitation" aria-labelledby="invitation-title">
+      <div class="invitation-content">
+        <p class="eyebrow">Oh, the sweetest things are growing</p>
+        <h1 id="invitation-title">A LITTLE<br>ONE IS<br>ON THE<br><em>WAY</em></h1>
+        <div class="celebration">
+          <p>Join us to celebrate</p>
+          <h2><span id="honoree">Shivani’s</span><br>Baby Shower</h2>
+        </div>
+        <div class="event-details">
+          <p class="event-date"><time id="event-date" datetime="2026-12-13">Sunday, December 13</time><span id="event-year">2026</span></p>
+          <div class="schedule">
+            <p><span>Puja</span><time id="puja-time" datetime="2026-12-13T10:00:00-08:00">10:00 AM</time></p>
+            <span class="schedule-divider" aria-hidden="true"></span>
+            <p><span>Lunch &amp; Games</span><time id="lunch-time" datetime="2026-12-13T11:00:00-08:00">11:00 AM</time></p>
+          </div>
+          <p class="timezone-note">All times Pacific</p>
+          <p class="venue"><span id="venue">The Courtyard Hall</span><span id="location">Sunnyvale, CA</span></p>
+        </div>
+        <a class="invitation-rsvp" href="#rsvp">Come celebrate with us <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <nav class="event-actions" aria-label="Event links">
+      <a id="calendar-link" href="./shivani-baby-shower.ics" download="shivani-baby-shower.ics"><span aria-hidden="true">＋</span> Add to calendar</a>
+      <span class="action-divider" aria-hidden="true"></span>
+      <a id="directions-link" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Courtyard%20Hall%2C%20Sunnyvale%2C%20CA" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span> Get directions<span class="sr-only"> (opens a new tab)</span></a>
+    </nav>
+    <p id="directions-note" class="directions-note">Map opens a venue search. Please confirm the exact address with the host.</p>
+    <section id="rsvp" class="rsvp-section" aria-labelledby="rsvp-heading">
+      <div class="section-flower" aria-hidden="true">✾</div>
+      <p class="eyebrow">A seat at our celebration</p>
+      <h2 id="rsvp-heading">Will you be joining us?</h2>
+      <p class="section-intro">We’d love to share this special day with you.<br>One reply for your whole family is perfect.</p>
+      <noscript><p class="notice">Please enable JavaScript to RSVP here. You can still download the calendar event or open directions above.</p></noscript>
+      <p id="setup-notice" class="notice" hidden>Online RSVPs aren’t open yet. Please check back or contact the host to reply.</p>
+      <form id="rsvp-form" aria-describedby="privacy-note">
+        <fieldset id="form-fields" disabled>
+          <legend class="sr-only">Your RSVP</legend>
+          <div class="field">
+            <label for="family-name">Guest / family name <span class="required-label">(required)</span></label>
+            <input id="family-name" name="familyName" autocomplete="name" required maxlength="120" placeholder="Your name or family name">
+          </div>
+          <fieldset class="attendance-field">
+            <legend>Will you be attending? <span class="required-label">(required)</span></legend>
+            <div class="attendance-options">
+              <label class="radio-option"><input type="radio" name="attending" value="yes" required><span>Yes, happily!</span><span class="option-flower" aria-hidden="true">✿</span></label>
+              <label class="radio-option"><input type="radio" name="attending" value="no" required><span>Sorry, we can’t make it</span></label>
+            </div>
+          </fieldset>
+          <div id="attending-fields" hidden>
+            <div class="field count-field">
+              <label for="guest-count">Number attending <span class="required-label">(required)</span><span class="field-hint">Including you and any children</span></label>
+              <select id="guest-count" name="count" disabled>
+                <option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+              </select>
+            </div>
+            <div class="field"><label for="guest-names">Names of guests attending <span class="optional">(optional)</span></label><textarea id="guest-names" name="guestNames" rows="2" maxlength="500" placeholder="So we know who to look forward to seeing" disabled></textarea></div>
+            <div class="field"><label for="dietary-needs">Dietary needs <span class="optional">(optional)</span></label><input id="dietary-needs" name="dietaryNeeds" maxlength="500" placeholder="Allergies or dietary preferences" disabled></div>
+          </div>
+          <div class="field"><label for="message">A little note for Shivani <span class="optional">(optional)</span></label><textarea id="message" name="message" rows="3" maxlength="1500" placeholder="Send some love…"></textarea></div>
+          <div class="honeypot" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        </fieldset>
+        <p id="form-status" class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <button id="submit-button" class="submit-button" type="submit" disabled><span id="submit-label">Send RSVP</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+        <p id="privacy-note" class="privacy-note">Your reply is shared only with the hosts to help plan the celebration. Please share only the details you’re comfortable sharing.</p>
+      </form>
+      <div id="confirmation" class="confirmation" hidden tabindex="-1">
+        <div class="confirmation-flower" aria-hidden="true">✿</div>
+        <h3 id="confirmation-heading">Thank you!</h3>
+        <p id="confirmation-message">We can’t wait to celebrate with you.</p>
+        <p class="confirmation-footnote">Your RSVP has been saved. To change your reply, please contact the host.</p>
+      </div>
+    </section>
+  </main>
+  <footer><span aria-hidden="true">❧</span><p>A little one. A lot of love.</p><small>Celebrating Shivani · <span id="footer-date">December 13, 2026</span></small></footer>
+</body>
+</html>

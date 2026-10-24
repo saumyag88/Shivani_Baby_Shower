@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Shivani Baby Shower//Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:shivani-baby-shower-20261213@invitation.local
+DTSTAMP:20261024T174924Z
+DTSTART:20261213T180000Z
+SUMMARY:Shivani’s Baby Shower
+LOCATION:The Courtyard Hall\, Sunnyvale\, CA
+DESCRIPTION:Join us to celebrate Shivani’s Baby Shower.\nPuja at 10:00 AM
+ . Lunch & Games at 11:00 AM.\nAll times America/Los_Angeles. End time to b
+ e confirmed.\nPlease confirm the exact street address with the host.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+*.csv
+*.xlsx
+*.xls
+*.tsv
+credentials*.json
+service-account*.json
+*.pem
+*.key
+coverage/
+work/
+test-results/
